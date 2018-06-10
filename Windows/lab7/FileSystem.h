@@ -28,7 +28,7 @@ namespace filesystem
 	public:
 		typedef char byte;
 
-		// the structeres are sored in memory according to the rule alignment
+		// the structures are sored in memory according to the rule alignment
 		// here the alignment value is set to 1, thus the struture's fildes will
 		// be aligned according to one byte (the structure will have a "real" size)
 		#pragma pack(push, 1)
