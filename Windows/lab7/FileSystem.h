@@ -28,8 +28,8 @@ namespace filesystem
 	public:
 		typedef char byte;
 
-		// the structures are sored in memory according to the rule alignment
-		// here the alignment value is set to 1, thus the struture's fildes will
+		// the structures are stored in memory according to the alignment rule.
+		// Here the alignment value is set to 1, thus the struture's fildes will
 		// be aligned according to one byte (the structure will have a "real" size)
 		#pragma pack(push, 1)
 		struct FileMetaDataTableField
