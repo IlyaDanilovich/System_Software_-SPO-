@@ -7,8 +7,16 @@
 using namespace std;
 using namespace filesystem;
 
+/// <summary>
+/// The name of source file, which represents our disk (physical memory)
+/// </summary>
 const char FileSystem::SOURCE_NAME_[] = "disk.bin";
 
+/// <summary>
+/// FileSystem class constructor, where the source file is either created, if it didn't exist,
+/// or is opened and is bieng read, in order to extract the FileMetaDataTable, which serves,
+/// as a container for our file descriptors.
+/// </summary>
 FileSystem::FileSystem()
 {
 	this->free_space_ = sizeof(Block) * AMOUNT_OF_BLOCKS_;
@@ -55,6 +63,9 @@ void FileSystem::Help()
 	cout << endl;
 }
 
+/// <summary>
+/// Resets the disk, by deleteing all information from file and FMDT, and writing zero bytes in a file.
+/// </summary>
 void FileSystem::ResetDisk()
 {
 	this->free_space_ = sizeof(Block) * AMOUNT_OF_BLOCKS_;
@@ -74,6 +85,9 @@ void FileSystem::ResetDisk()
 	cout << endl << endl << "The disk was successfully reseted..." << endl << endl;
 }
 
+/// <summary>
+/// Printing the names of existing files in a console.
+/// </summary>
 void FileSystem::ShowFiles()
 {
 	cout << endl << "All files: " << endl << endl;
@@ -89,6 +103,12 @@ void FileSystem::ShowFiles()
 	cout << endl;
 }
 
+/// <summary>
+/// Creates new file, by placing it's name to a free FMDT field, and by
+/// allocating a free memory block from the source file
+/// (setting the begining_offset value of FMDT field, thus, providing the information
+/// about block's position in a file).
+/// </summary>
 void FileSystem::CreateNewFile()
 {
 	cout << "Please, enter the name of a new file" << endl;
@@ -128,6 +148,9 @@ void FileSystem::CreateNewFile()
 	cout << endl << endl << "Max amount of files is reached! Free some space, to perform this operation..." << endl << endl;
 }
 
+/// <summary>
+/// Saving current FMDT to a source file.
+/// </summary>
 void FileSystem::SaveFMDT()
 {
 	this->source_file_.seekp(0);
@@ -135,15 +158,25 @@ void FileSystem::SaveFMDT()
 	this->source_file_.flush();
 }
 
+/// <summary>
+/// Writing a block to file with a given offset (from the begining)
+/// </summary>
+/// <param name="block"> The Block object, which will be written </param>
+/// <param name="offset"> Offset from the begining of the file, where the given block will be written </param>
 void FileSystem::SaveBlock(Block block, int offset)
 {
 	this->source_file_.seekp(offset);
 	this->source_file_.write((byte*)&block, sizeof(Block));
 	this->source_file_.clear();
 	this->source_file_.flush();
-	this->source_file_.clear();
 }
 
+/// <summary>
+/// Clearing block, by setting all it's values to zero
+/// </summary>
+/// <param name = "block">
+/// Block's object to clear
+/// </param>
 void FileSystem::ClearBlock(Block &block)
 {
 	block.next_offset = 0;
@@ -151,6 +184,15 @@ void FileSystem::ClearBlock(Block &block)
 	SecureZeroMemory(block.data, this->BLOCK_DATA_SIZE);
 }
 
+/// <summary>
+/// Extracts a block from file with the given offset
+/// </summary>
+/// <param name="offset">
+/// Offset, from the begining of the file
+/// </param>
+/// <returns>
+/// The extracted Block object
+/// </returns>
 FileSystem::Block FileSystem::ReadBlock(int offset)
 {
 	Block temp_block;
@@ -160,6 +202,15 @@ FileSystem::Block FileSystem::ReadBlock(int offset)
 	return temp_block;
 }
 
+/// <summary>
+/// Examining the file on free memory blocks presence.
+/// </summary>
+/// <param name="next">
+/// If true, the second found free block offset will be returned, otherwise, the first found one,
+/// </param>
+/// <returns>
+/// Found block's offset, from the begining of the source file
+/// </returns>
 int FileSystem::FindFreeBlock(bool next)
 {
 	byte current_flag = 0;
@@ -183,6 +234,19 @@ int FileSystem::FindFreeBlock(bool next)
 	return 0;
 }
 
+/// <summary>
+/// An implementation of strcpy, with some additional features 
+/// (like ignoring the \0 symbol in our destination string)
+/// </summary>
+/// <param name="destinantion">
+/// Destination char array (where to copy)
+/// </param>
+/// <param name="destination_max_size">
+/// Max value of destinantion array's size
+/// </param>
+/// <param name="source">
+/// Source cahr array (whence to copy)
+/// </param>
 void FileSystem::CopyString(char* destinantion, int destination_max_size, const char* source)
 {
 	for (int i = 0; i < destination_max_size && source[i] != '\0'; i++)
@@ -191,6 +255,11 @@ void FileSystem::CopyString(char* destinantion, int destination_max_size, const 
 	}
 }
 
+/// <summary>
+/// Removes file, by setting all it's memory blocks to 0 (thus busy_flag says, that the block is free
+/// and the param next_offset shows, that this block is the last (first and last in this case)).
+/// Also deletes correspondong FMDT field.
+/// </summary>
 void FileSystem::RemoveFile()
 {
 	cout << "Please, enter the name of a file to delete" << endl;
@@ -230,7 +299,17 @@ void FileSystem::RemoveFile()
 	cout << endl << "Incorrect file name, please repeat..." << endl;
 }
 
-
+/// <summary>
+/// Read the file in a string buffer, by copying information from all it's blocks into
+/// a string.
+/// </summary>
+/// <param name="begining_offset">
+/// The offset of the first block of the given file (this is the value begining offset of a correspondong FMDT field)
+/// </param>
+/// <returns>
+/// String bufffer, which contains the given file (We can interpret this as loading the file from disk
+/// to RAM, where it can be processed)
+/// </returns>
 string FileSystem::FileToBuffer(int begining_offset)
 {
 	string result_str;
@@ -251,6 +330,9 @@ string FileSystem::FileToBuffer(int begining_offset)
 	}
 }
 
+/// <summary>
+/// Opens a file, selected by the user, and provides an ability to view or modify it.
+/// </summary>
 void FileSystem::OpenFile()
 {
 	cout << "Please, enter the name of a file" << endl;
@@ -264,9 +346,13 @@ void FileSystem::OpenFile()
 		{
 			string fileBuffer = this->FileToBuffer(this->fmdt_[i].begining_offset);
 
+			// processing the file
 			string processed;
 			processed = this->ProcessFileBuffer(fileBuffer);
 
+			// if the file is cleared, simply clear all the blocks, connected to it
+			// and then restore the first one (but leave it empty), thus leaving an empty file,
+			// where we are still able to write something, becuase at least one block is allocated.
 			if (processed.length() == 0)
 			{
 				int offset = this->fmdt_[i].begining_offset;
@@ -302,6 +388,18 @@ void FileSystem::OpenFile()
 	return;
 }
 
+/// <summary>
+/// Saving the file to our disk, by writing all the file's block in the source file.
+/// If new amount of blocks is bigger, than it was before processing, new free
+/// blocks are allocated (if possible). If new amount of blocks is less than it was before,
+/// all the redundant blocks are cleared (set free).
+/// </summary>
+/// <param name="processed">
+/// A string buffer, which contains modified file.
+/// </param>
+/// <param name="begining_offset">
+/// The beginign offset of the file (the location of it's first block).
+/// </param>
 void FileSystem::SaveFile(string processed, int begining_offset)
 {
 	int unprocessed_length = processed.length();
@@ -321,8 +419,10 @@ void FileSystem::SaveFile(string processed, int begining_offset)
 		unprocessed_length -= min_size;
 		processed.erase(0, min_size);
 
+		// if all the file buffer was processed
 		if (unprocessed_length == 0)
 		{
+			// if unused blocks were left, clear them
 			if (temp_block.next_offset != 0)
 			{
 				int clear_offset = temp_block.next_offset;
@@ -345,12 +445,15 @@ void FileSystem::SaveFile(string processed, int begining_offset)
 			else return;
 		}
 
+		// if the block was the last one from those, which there already allocted
 		if (temp_block.next_offset == 0)
 		{
+			// add new blocks, if not all file buffer was processed
 			if (unprocessed_length != 0)
 			{
 				temp_block.next_offset = this->FindFreeBlock(false);
 
+				// if there are no more free blocks
 				if (temp_block.next_offset == 0)
 				{
 					cout << endl << endl << "Not enough space on disk! Some information was lost!" << endl << endl;
@@ -369,6 +472,15 @@ void FileSystem::SaveFile(string processed, int begining_offset)
 	}
 }
 
+/// <summary>
+/// A method, where interaction with user (modifying the file) takes place.
+/// </summary>
+/// <param name="fileBuffer">
+/// A string buffer, which contains selected file.
+/// </param>
+/// <returns>
+/// Returns processed string
+/// </returns>
 string FileSystem::ProcessFileBuffer(string fileBuffer)
 {
 	string processed = fileBuffer;
