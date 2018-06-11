@@ -5,6 +5,10 @@
 #include "SmartPointer.h"
 #include <vector>
 
+/// <summary>
+/// MVC model in this project is pretty bad, because it was written for about 2 and a half hours,
+/// so i recommend rewriting the GUI, if you intend to use this memory model
+/// </summary>
 struct Model
 {
 private:

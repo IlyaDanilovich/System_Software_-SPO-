@@ -5,6 +5,10 @@
 
 namespace memorymanager
 {
+	/// <summary>
+	/// An interface, which gives opportunity to use different
+	///  MemoryManager implementatioms (in this project there is only one implementation)
+	/// </summary>
 	class IMemoryManager
 	{
 	public:

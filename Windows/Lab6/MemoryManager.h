@@ -11,6 +11,11 @@
 
 namespace memorymanager
 {
+	/// <summary>
+	/// MemoryManager, is a class, which emulates work wtih memory managment, 
+	/// by distributing free space from previously allocated byte* data_pool_
+	/// among the requsting objects
+	/// </summary>
 	class MemoryManager : public IMemoryManager
 	{
 	private:

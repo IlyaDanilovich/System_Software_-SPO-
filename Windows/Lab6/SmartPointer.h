@@ -11,10 +11,20 @@
 using namespace memorymanager;
 using namespace std;
 
+
+/// <summary>
+/// SmartPointer class serves to ease the work with MemoryManagr class, by providing
+/// an API, to store any type of data (from standart data types to user's structures and classes)
+/// and to controll the allocated memory (which will be automaticly released after the destruction of
+/// SmartPointer object) 
+/// </summary>
 template <typename Type>
 class SmartPointer
 {
 private:
+	/// <summary>
+	/// This class will serve as a counter for references, in order to provide garbage collection in SmartPointer destructor.
+	/// </summary>
 	class ReferenceCounter
 	{
 	public:
@@ -43,6 +53,15 @@ private:
 	};
 
 public:
+	/// <summary>
+	/// Serves to quickly move through the allocated array, and to modify it's elements (if needed).
+	/// </summary>
+	/// <param name="index">
+	/// Index of an element.
+	/// </param>
+	/// <returns>
+	/// Returns a value from the array by reference, in order to be able, to change it's content
+	/// </returns>
 	Type& operator[](const int index)
 	{
 		if (index < 0 || index >= *(this->size_)) 
@@ -62,6 +81,7 @@ public:
 
 		return this->stub_;
 	}
+
 	Type& operator*()
 	{
 		if (this->connected_memory_->empty())
@@ -70,6 +90,7 @@ public:
 		Type* data_pointer_ = reinterpret_cast<Type*>(this->connected_memory_->front()->offset_pointer);
 		return *data_pointer_;
 	}
+
 	SmartPointer<Type>& operator=(const SmartPointer<Type>& other)
 	{
 		// Assignment operator
@@ -100,6 +121,19 @@ public:
 	{
 		return *(this->size_);
 	}
+
+	/// <summary>
+	/// This method gives an ability to quickly initialize the allocated memory
+	/// </summary>
+	/// <param name="source">
+	/// Source arraym to copy from
+	/// </param>
+	/// <param name="source_size">
+	/// Size of source array
+	/// </param>
+	/// <returns>
+	/// Returns amount of copied elements
+	/// </returns>
 	int copyData(Type* source, int source_size)
 	{
 		if (this->memory_manager_ == nullptr)
@@ -124,6 +158,7 @@ public:
 		}
 		return i;
 	}
+
 	void allocateMemory(size_t size)
 	{
 		if (this->memory_manager_ == nullptr)
@@ -146,6 +181,7 @@ public:
 			return;
 		}
 	}	
+
 	void freeMemory()
 	{
 		if (this->memory_manager_ == nullptr)
