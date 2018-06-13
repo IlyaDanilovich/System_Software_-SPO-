@@ -8,12 +8,12 @@
 
 Список лабораторных:
 
-1. [Создание дочернего процесса](https://github.com/Bulbash3r/Java-Labs/tree/master/Laba%202).
-2. Синхронихация процессов с помощью сигналов/событий.
-3. Работа с разделяемой памятью.
-4. Синхронизация потоков.
-5. Асинхронные (системные) операции с файлами (чтение/запись).
-6. Менеджер памяти.
-7. Эмулятор файловой системы.
+1. Создание дочернего процесса. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab1), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab1).
+2. Синхронихация процессов с помощью сигналов/событий. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab2), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab2).
+3. Работа с разделяемой памятью. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab3), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab3).
+4. Синхронизация потоков. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab4), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab4).
+5. Асинхронные (системные) операции с файлами (чтение/запись). [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab5), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab5).
+6. Менеджер памяти. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab6).
+7. Эмулятор файловой системы. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab7).
 
 P.S. Лабораторные работы 6 и 7 выполнялись только под Windows
