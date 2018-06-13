@@ -25,4 +25,4 @@
 6. Менеджер памяти. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab6).
 7. Эмулятор файловой системы. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/lab7).
 
-**P.S.** Лабораторные работы 6 и 7 выполнялись только под Windows
+**P.S.** ***Лабораторные работы 6 и 7 выполнялись только под Windows***
