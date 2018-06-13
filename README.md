@@ -6,7 +6,16 @@
 5 лабораторная под Linux реализовывалась в текстовм редакторе с использованием
 терминала для компиляции.
 
-Список лабораторных:
+## Содержание
+1. [Программное обеспечение](#Программное-обеспечение)
+2. [Условия лабораторных работ](#Условия-лабораторных-работ)
+
+## Программное обеспечение
+При написании лаб использовались следующие IDE:
+- [VisualStudio](https://www.visualstudio.com/)(Community2017): 15.6.1  
+- [Qt](https://www.qt.io/): 4.5.1
+
+## Условия лабораторных работ
 
 1. Создание дочернего процесса. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab1), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab1).
 2. Синхронихация процессов с помощью сигналов/событий. [Linux](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab2), [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Windows/Lab2).
@@ -16,4 +25,4 @@
 6. Менеджер памяти. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab6).
 7. Эмулятор файловой системы. [Windows](https://github.com/NasterVill/System_Software_-SPO-/tree/master/Linux/Lab7).
 
-P.S. Лабораторные работы 6 и 7 выполнялись только под Windows
+**P.S.** Лабораторные работы 6 и 7 выполнялись только под Windows
