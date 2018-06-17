@@ -136,7 +136,7 @@ void Controller::AllocateTo(TYPE type, int index, size_t size)
 		if (index >= this->model_->char_vector_.size())
 			return;
 
-		this->model_->char_vector_[index].allocateMemory(size * sizeof(char));
+		this->model_->char_vector_[index].allocateMemory(size);
 	
 		break;
 	}
@@ -145,7 +145,7 @@ void Controller::AllocateTo(TYPE type, int index, size_t size)
 		if (index >= this->model_->int_vector_.size())
 			return;
 
-		this->model_->int_vector_[index].allocateMemory(size * sizeof(int));
+		this->model_->int_vector_[index].allocateMemory(size);
 
 		break;
 	}
@@ -154,7 +154,7 @@ void Controller::AllocateTo(TYPE type, int index, size_t size)
 		if (index >= this->model_->float_vector_.size())
 			return;
 
-		this->model_->float_vector_[index].allocateMemory(size * sizeof(float));
+		this->model_->float_vector_[index].allocateMemory(size);
 
 		break;
 	}
@@ -163,7 +163,7 @@ void Controller::AllocateTo(TYPE type, int index, size_t size)
 		if (index >= this->model_->double_vector_.size())
 			return;
 
-		this->model_->double_vector_[index].allocateMemory(size * sizeof(double));
+		this->model_->double_vector_[index].allocateMemory(size);
 
 		break;
 	}
