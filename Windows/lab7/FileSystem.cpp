@@ -8,12 +8,12 @@ using namespace std;
 using namespace filesystem;
 
 /// <summary>
-/// The name of source file, which represents our disk (physical memory)
+/// The name of the source file, which represents our disk (physical memory)
 /// </summary>
 const char FileSystem::SOURCE_NAME_[] = "disk.bin";
 
 /// <summary>
-/// FileSystem class constructor, where the source file is either created, if it didn't exist,
+/// FileSystem's constructor, where the source file is either created, if it didn't exist,
 /// or is opened and is bieng read, in order to extract the FileMetaDataTable, which serves,
 /// as a container for our file descriptors.
 /// </summary>
@@ -258,7 +258,7 @@ void FileSystem::CopyString(char* destinantion, int destination_max_size, const 
 /// <summary>
 /// Removes file, by setting all it's memory blocks to 0 (thus busy_flag says, that the block is free
 /// and the param next_offset shows, that this block is the last (first and last in this case)).
-/// Also deletes correspondong FMDT field.
+/// Also deletes corresponding FMDT field.
 /// </summary>
 void FileSystem::RemoveFile()
 {
@@ -389,9 +389,9 @@ void FileSystem::OpenFile()
 }
 
 /// <summary>
-/// Saving the file to our disk, by writing all the file's block in the source file.
+/// Saving the file to our disk, by writing all the file's blocks in the source file.
 /// If new amount of blocks is bigger, than it was before processing, new free
-/// blocks are allocated (if possible). If new amount of blocks is less than it was before,
+/// blocks are allocated for the file (if possible). If new amount of blocks is less than it was before,
 /// all the redundant blocks are cleared (set free).
 /// </summary>
 /// <param name="processed">
