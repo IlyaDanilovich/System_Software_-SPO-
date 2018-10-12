@@ -12,8 +12,8 @@
 
 ## Программное обеспечение
 При написании лабораторных работ использовались следующие IDE:
-- [VisualStudio](https://www.visualstudio.com/)(Community2017): 15.6.1  
-- [Qt](https://www.qt.io/): 4.5.1
+- VisualStudio(Community2017): 15.6.1  
+- Qt: 4.5.1
 
 ## Условия лабораторных работ
 
